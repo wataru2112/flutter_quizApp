@@ -1,7 +1,10 @@
 import '../importer.dart';
+import '../constant/color_constants.dart';
 
 class StartPage extends StatelessWidget {
-  const StartPage({super.key});
+  const StartPage(this.startQuiz, {super.key});
+
+  final void Function() startQuiz;
 
   @override
   Widget build(BuildContext context) {
@@ -12,27 +15,35 @@ class StartPage extends StatelessWidget {
           Image.asset(
             'assets/images/quiz-logo.png',
             width: 300,
+            color: const Color.fromARGB(150, 214, 208, 208),
           ),
+          // Opacity(
+          //   opacity: 0.5,
+          //   child: Image.asset(
+          //     'assets/images/quiz-logo.png',
+          //     width: 300,
+          //   ),
+          // ),
           const SizedBox(
             height: 80,
           ),
-          const Text(
+          Text(
             'Learn Fullter title fun way!',
-            style: TextStyle(
-              color: Color.fromARGB(255, 228, 201, 232),
+            style: GoogleFonts.lato(
+              color: ColorConstans.purple,
               fontSize: 24,
             ),
           ),
           const SizedBox(
             height: 30,
           ),
-          OutlinedButton(
-            onPressed: () {},
+          OutlinedButton.icon(
+            onPressed: startQuiz,
             style: OutlinedButton.styleFrom(
               foregroundColor: Colors.white,
-              side: const BorderSide(color: Colors.black),
             ),
-            child: const Text('StartQuiz'),
+            icon: const Icon(Icons.arrow_right_alt),
+            label: const Text('StartQuiz'),
           ),
         ],
       ),
