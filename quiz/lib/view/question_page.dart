@@ -6,7 +6,9 @@ import '../importer.dart';
 import '../data/question.dart';
 
 class QuestionPage extends StatefulWidget {
-  const QuestionPage({super.key});
+  const QuestionPage({required this.onSelectedAnswer, super.key});
+
+  final void Function(String answer) onSelectedAnswer;
 
   @override
   State<QuestionPage> createState() {
@@ -16,7 +18,8 @@ class QuestionPage extends StatefulWidget {
 
 class _QuestionPageState extends State<QuestionPage> {
   int currentQuestionIndex = 0;
-  void onTap() {
+  void onTap(String selectedAnswer) {
+    widget.onSelectedAnswer(selectedAnswer);
     setState(() {
       currentQuestionIndex++;
     });
@@ -51,7 +54,7 @@ class _QuestionPageState extends State<QuestionPage> {
               (answer) {
                 return AnswerButton(
                   answerText: answer,
-                  onTap: onTap,
+                  onTap: () => onTap(answer),
                 );
               },
             ),

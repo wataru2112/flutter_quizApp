@@ -1,4 +1,6 @@
+import 'package:quiz/data/question.dart';
 import 'package:quiz/view/question_page.dart';
+import 'package:quiz/view/result-page.dart';
 import 'package:quiz/view/start_page.dart';
 
 import 'importer.dart';
@@ -13,29 +15,37 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyApp extends State<MyApp> {
-  // Widget? activePage;
-
-  // @override
-  // void initState() {
-  //   activePage = StartPage(switchPage);
-  //   super.initState();
-  // }
+  List<String> selectedAnswers = [];
   String activePage = 'start-page';
 
   void switchPage() {
     setState(
       () {
-        // activePage = const QuestionPage();
         activePage = 'question-page';
       },
     );
+  }
+
+  void chooseAnswer(String answer) {
+    selectedAnswers.add(answer);
+
+    if (selectedAnswers.length == questions.length) {
+      selectedAnswers = [];
+      setState(() {
+        activePage = 'result-page';
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     Widget screenWidget = StartPage(switchPage);
     if (activePage == 'question-page') {
-      screenWidget = const QuestionPage();
+      screenWidget = QuestionPage(
+        onSelectedAnswer: chooseAnswer,
+      );
+    } else if (activePage == 'result-page') {
+      screenWidget = ResultPage();
     }
 
     return MaterialApp(
