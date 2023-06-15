@@ -45,7 +45,9 @@ class _MyApp extends State<MyApp> {
         onSelectedAnswer: chooseAnswer,
       );
     } else if (activePage == 'result-page') {
-      screenWidget = ResultPage();
+      screenWidget = ResultPage(
+        choosenAnswers: selectedAnswers,
+      );
     }
 
     return MaterialApp(

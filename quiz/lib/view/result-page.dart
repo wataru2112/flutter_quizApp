@@ -1,7 +1,29 @@
+import 'package:quiz/data/question.dart';
 import 'package:quiz/importer.dart';
 
 class ResultPage extends StatelessWidget {
-  const ResultPage({super.key});
+  const ResultPage({
+    required this.choosenAnswers,
+    super.key,
+  });
+
+  final List<String> choosenAnswers;
+
+  List<Map<String, Object>> getSummaryData() {
+    final List<Map<String, Object>> summary = [];
+
+    for (int i = 0; i < choosenAnswers.length; i++) {
+      summary.add(
+        {
+          'question_index': i,
+          'question': questions[i],
+          'correct_answer': questions[i].answers,
+          'user_answer': choosenAnswers[i],
+        },
+      );
+    }
+    return summary;
+  }
 
   @override
   Widget build(BuildContext context) {
