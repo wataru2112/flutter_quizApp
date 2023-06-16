@@ -30,7 +30,7 @@ class _MyApp extends State<MyApp> {
     selectedAnswers.add(answer);
 
     if (selectedAnswers.length == questions.length) {
-      selectedAnswers = [];
+      // selectedAnswers = [];
       setState(() {
         activePage = 'result-page';
       });
