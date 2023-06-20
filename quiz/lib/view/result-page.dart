@@ -6,9 +6,11 @@ class ResultPage extends StatelessWidget {
   const ResultPage({
     required this.choosenAnswers,
     super.key,
+    required this.onRestart,
   });
 
   final List<String> choosenAnswers;
+  final void Function() onRestart;
 
   List<Map<String, Object>> getSummaryData() {
     final List<Map<String, Object>> summary = [];
@@ -43,7 +45,13 @@ class ResultPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-                'You answered $numCorrectQuestions out of $numTotalQuestions questions correctly!'),
+              'You answered $numCorrectQuestions out of $numTotalQuestions questions correctly!',
+              style: GoogleFonts.lato(
+                color: const Color.fromARGB(255, 238, 200, 253),
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             const SizedBox(
               height: 30,
             ),
@@ -51,10 +59,12 @@ class ResultPage extends StatelessWidget {
             const SizedBox(
               height: 30,
             ),
-            TextButton(
-              onPressed: () {},
-              child: const Text('restart'),
-            )
+            TextButton.icon(
+              onPressed: onRestart,
+              style: TextButton.styleFrom(foregroundColor: Colors.white),
+              icon: const Icon(Icons.refresh),
+              label: const Text('Restart Quiz!'),
+            ),
           ],
         ),
       ),

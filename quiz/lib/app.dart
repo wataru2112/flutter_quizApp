@@ -26,11 +26,17 @@ class _MyApp extends State<MyApp> {
     );
   }
 
+  void restartQuiz() {
+    setState(() {
+      selectedAnswers = [];
+      activePage = 'question-page';
+    });
+  }
+
   void chooseAnswer(String answer) {
     selectedAnswers.add(answer);
 
     if (selectedAnswers.length == questions.length) {
-      // selectedAnswers = [];
       setState(() {
         activePage = 'result-page';
       });
@@ -47,6 +53,7 @@ class _MyApp extends State<MyApp> {
     } else if (activePage == 'result-page') {
       screenWidget = ResultPage(
         choosenAnswers: selectedAnswers,
+        onRestart: restartQuiz,
       );
     }
 
